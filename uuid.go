@@ -149,6 +149,8 @@ func NewV3(pNamespace UUID, pNames ...UniqueName) Uuid {
 // NewV4 generates a new RFC4122 version 4 UUID a cryptographically secure
 // random UUID.
 func NewV4() Uuid {
+	generator.Lock()
+	defer generator.Unlock()
 	o, err := v4()
 	if err == nil {
 		return o[:]
