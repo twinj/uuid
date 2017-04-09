@@ -351,6 +351,13 @@ func TestUUID_NewV4Bulk(t *testing.T) {
 	}
 }
 
+func TestUUID_NewV4BulkConcurrent(t *testing.T) {
+	for i := 0; i < generate; i++ {
+		go func(){printer(NewV4())}()
+	}
+}
+
+
 func TestUUID_NewV5Bulk(t *testing.T) {
 	for i := 0; i < generate; i++ {
 		printer(NewV5(NameSpaceDNS, goLang, Name(string(i))))
